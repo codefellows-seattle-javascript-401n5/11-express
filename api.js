@@ -1,9 +1,11 @@
 'use strict';
 
-const router = require('./src/lib/router.js');
-const Food = require('./src/models/foods.js');
+import express from 'express';
+const router = express.Router();
 
-const fs = require('fs');
+import Foods from '..models/foods.js';
+
+import fs from 'fs';
 
 let sendJSON = (res, data) => {
     res.statusCode = 200;
