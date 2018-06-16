@@ -3,7 +3,7 @@
 import express from 'express';
 const router = express.Router();
 
-import Foods from '..models/foods.js';
+import Foods from '../../models/foods.js';
 
 import fs from 'fs';
 
@@ -68,4 +68,4 @@ router.post('/api/v1/food', (req, res) => {
         .catch(console.error);
 });
 
-module.exports = [];
+export default router;
