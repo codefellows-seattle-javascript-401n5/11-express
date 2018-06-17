@@ -43,22 +43,21 @@ router.get('/api/v1/food', (req, res) => {
 });
 
 router.get('/api/v1/food/:id', (req, res) => {
-    if(req.params.id){
+    
         Foods.findOne(req.params.id)
             .then(data => sendJSON(res, data))
             .catch(err => serverError(res, err));
-    } else {
-        serverError(res, 'Record Not Found');
-    }
+            console.log('!!!!!!!!!!!!', req.params.id);
+    
 });
 
-router.delete('api/v1/food', (req, res) => {
-    if(req.query.id){
-        Foods.deleteOne(req.query.id)
+router.delete('api/v1/food/:id', (req, res) => {
+    if(req.params.id){
+        Foods.deleteOne(req.params.id)
             .then(() => {
                 res.statusCode = 204;
                 res.statusMessage = 'success';
-                res.write(req.query.id, ': was deleted');
+                res.write(req.params.id, ': was deleted');
                 res.end();
             })
             .catch(console.error);
