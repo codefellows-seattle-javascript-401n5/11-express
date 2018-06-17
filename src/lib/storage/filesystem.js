@@ -67,3 +67,5 @@ storage.save = (data) => {
         });
     });
 };
+
+module.exports = storage;

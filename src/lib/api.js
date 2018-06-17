@@ -23,6 +23,7 @@ let serverError = (res, err) => {
     res.write(JSON.stringify(error));
     res.end();
 };
+
 router.get('/', (req, res) => {
 
     fs.readFile('index.html', (err, data) => {
@@ -36,36 +37,40 @@ router.get('/', (req, res) => {
 });
 
 router.get('/api/v1/food', (req, res) => {
-    if(req.query.id){
-        Food.findOne(req.query.id)
+        Foods.fetchAll()
             .then(data => sendJSON(res, data))
             .catch(err => serverError(res, err));
-            res.write(req.query.id);
-            res.end();
+});
+
+router.get('/api/v1/food/:id', (req, res) => {
+    if(req.params.id){
+        Foods.findOne(req.params.id)
+            .then(data => sendJSON(res, data))
+            .catch(err => serverError(res, err));
     } else {
-        Food.fetchAll()
-            .then(data => sendJSON(res, data))
-            .catch(err => serverError(res, err));
+        serverError(res, 'Record Not Found');
     }
 });
 
 router.delete('api/v1/food', (req, res) => {
     if(req.query.id){
-        Food.deleteOne(req.query.id)
-            .then(success => {
-                let data = {id:req.query.id, deleted:success};
-                sendJSON(res, data);
+        Foods.deleteOne(req.query.id)
+            .then(() => {
+                res.statusCode = 204;
+                res.statusMessage = 'success';
+                res.write(req.query.id, ': was deleted');
+                res.end();
             })
             .catch(console.error);
     }
 });
 
-router.post('/api/v1/food', (req, res) => {
-
-    let record = new Food(req.body);
-    record.save()
+router.post('/api/v1/food', (req, res) => {  
+      let newFoods = new Foods(req.body);
+  
+      newFoods.save()
         .then(data => sendJSON(res, data))
         .catch(console.error);
-});
+  });
 
 export default router;

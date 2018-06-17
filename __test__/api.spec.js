@@ -1,32 +1,50 @@
 'use strict';
 
-import superagent from 'superagent';
+import superagent from'superagent';
 
 describe('API module', () => {
 
-  it('Should return ID when given one', () => {
+  xit('Should return hompage when given path', () => {
 
-    return superagent.get('http://localhost:3000/api/v1/food?id=hotdog')
+    return superagent.get('http://localhost:3000/')
       .then(response => {
-        expect(response.text).toBe('ID: hotdog was requested');
+        expect(response.text).toEqual(expect.stringContaining('<!DOCTYPE'));
       });
   });
 
-  it('should respond with not found when an id is not found', () => {
-
-    return superagent.get('http://localhost:3000/api/v1/food?id=badID')
-      .catch(err => {
-        expect(err.responseText).toBe('not found');
-        expect(err.responseStatus).toBe(404);
+  xit('Should return ID when given one', () => {
+    let obj = {corndog: 'this is a corndog'};
+    return superagent.post('http://localhost:3000/api/v1/')
+      .send(obj)
+      .then(() => {
+        return superagent.get('http://localhost:3000/api/v1/corndog')
+          .then(response => {
+            expect(response.statusCode).toBe(200);
+          });
       });
   });
 
-  it('should return with an error status of 400 when a badID is returned', () => {
+  xit('should return with an error status of 400 when a badID is returned', () => {
 
-    return superagent.get('http://localhost:3000/api/v1/food?id=badID')
+    return superagent.get('http://localhost:3000/api/v1/badID')
       .catch(err => {
-        expect(err.responseText).toBe('bad request');
-        expect(err.responseStatus).toBe(40);
+        // expect(err.responseText).toBe('bad request');
+        expect(err.responseStatus).toBe(400);
       });
   })
-})
+
+  it('handles a good post request', (done) => {
+    let obj = {title:'corndog',
+                content: 'this is a corndog'};
+    
+     superagent.post('http://localhost:3000/api/v1/food')
+      .send(obj)
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(JSON.parse(response.text).title).toEqual(obj.title);
+        console.log(JSON.parse(response.text).title,'!!!', obj.title);
+        done();
+      })
+      .catch(console.err);
+  });
+});

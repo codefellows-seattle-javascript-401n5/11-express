@@ -7,7 +7,7 @@ class Foods{
 
     constructor(config) {
 
-        this.is = uuid();
+        this.id = uuid();
         this.createdOn = new Date();
         this.title = config && config.title || '';
         this.content = config && config.content || '';
