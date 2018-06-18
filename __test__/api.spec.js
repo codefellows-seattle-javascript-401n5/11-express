@@ -32,8 +32,7 @@ describe('API module', () => {
       .send(obj)
       .then(response => {
         expect(response.statusCode).toBe(200);
-        expect(JSON.parse(response.text).title).toEqual(obj.title);
-        console.log(JSON.parse(response.text).title, '!!!', obj.title);
+        expect(JSON.parse(response.text).id).toEqual(obj.title);
         done();
       })
       .catch(console.err);
@@ -49,27 +48,13 @@ describe('API module', () => {
       .send(obj)
       .then(response => {
         superagent.delete('http://localhost:3000/api/v1/food/:id')
-        .then(response => {
-          expect(response.status).toEqual(204);
-        });
-      })
+          .then(response => {
+            console.log(response.body);
+            expect(response.status).toEqual(204);
+          });
+      });
+    done();
   });
-  // xit('return an id when given one', (done) => {
 
-  //   let obj = {
-  //     title: 'corndog',
-  //     content: 'this is a corndog'
-  //   }
-
-  //   superagent.post('http://localhost:3000/api/v1/food')
-  //   .send(obj)
-  //   .then((response) => {
-  //     superagent.get('http://localhost:3000/api/v1/food/corndog')
-  //     .then(res => {
-  //       expect(JSON.parse(response.text).title).toEqual(obj.title);
-  //       done();
-  //     });
-  //   })
-  //   .catch(console.err);
-  // });
+  it()
 });

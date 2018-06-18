@@ -15,20 +15,21 @@ let isRunning = false;
 
 module.exports = {
   start: (port) => {
-    if(! isRunning) {
+    if (!isRunning) {
       app.listen(port, (err) => {
-        if(err) { throw err; }
+        if (err) {
+          throw err;
+        }
         isRunning = true;
         console.log('Server is up on port', port);
       });
-    }
-    else {
+    } else {
       console.log('Server is already running');
     }
   },
 
   stop: () => {
-    app.close( () => {
+    app.close(() => {
       isRunning = false;
       console.log('Server has been stopped');
     });

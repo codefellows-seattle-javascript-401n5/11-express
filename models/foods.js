@@ -3,31 +3,31 @@
 const storage = require('../src/lib/storage/data-store.js');
 const uuid = require('uuid/v1');
 
-class Foods{
+class Foods {
 
-    constructor(config) {
+  constructor(config) {
 
-        this.id = uuid();
-        this.createdOn = new Date();
-        this.title = config && config.title || '';
-        this.content = config && config.content || '';
-    }
+    this.title = uuid();
+    this.createdOn = new Date();
+    this.id = config && config.title || '';
+    this.content = config && config.content || '';
+  }
 
-    save(){
-        return storage.save(this);
-    }
+  save() {
+    return storage.save(this);
+  }
 
-    static fetchAll(){
-        return storage.getAll();
-    }
+  static fetchAll() {
+    return storage.getAll();
+  }
 
-    static findOne(id){
-        return storage.get(id);
-    }
+  static findOne(id) {
+    return storage.get(id);
+  }
 
-    static deleteOne(id) {
-        return storage.delete(id);
-    }
+  static deleteOne(id) {
+    return storage.delete(id);
+  }
 
 }
 
