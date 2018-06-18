@@ -14,7 +14,7 @@ describe('API module', () => {
   });
   
 
-  it('should return with an error status of 400 when a badID is returned', () => {
+  it('should return with an error status of 400 when a badID is returned', (done) => {
 
     return superagent.get('http://localhost:3000/api/v1/badID')
       .catch(err => {
