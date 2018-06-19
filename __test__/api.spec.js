@@ -20,8 +20,8 @@ describe('API module', () => {
       .catch(err => {
         // expect(err.responseText).toBe('bad request');
         expect(err.status).toBe(404);
-        done();
       });
+    done();
   });
 
   it('handles a good post request', (done) => {
@@ -49,7 +49,7 @@ describe('API module', () => {
       });
     done();
   });
-  
+
   it('should delete entry when given specified id', (done) => {
     let obj = {
       title: 'sushi',
