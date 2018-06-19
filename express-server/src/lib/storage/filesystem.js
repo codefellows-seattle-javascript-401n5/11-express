@@ -66,6 +66,19 @@ storage.get = (id) => {
   });
 };
 
+storage.delete = (id) => {
+  return new Promise( (resolve, reject) => {
+    if ( database.id ) {
+      let file = `${dataDirectory}/${data.id}.json`;
+      fs.unlink(file, (err) => {
+        if(err){
+          reject(err);
+        }
+        resolve();
+      })
+    }
+  })
+}
 // Create a new data file with our model object.
 // Note that this does absolutely no error checking
 // other than requiring an .id property.  The model

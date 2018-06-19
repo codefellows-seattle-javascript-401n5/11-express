@@ -61,9 +61,14 @@ router.post('/api/v1/notes', (req,res) => {
 
 });
 
-// router.delete('/api/v1/notes', (req,res) => {
+router.delete('/api/v1/notes/:id', (req,res) => {
+  if(req.query.id){
+    Notes.deleteOne(req.query.id)
+    .then(success => sendJSON(res))
+    .catch(console.error)
+  }
 
-// })
+})
 
 // router.delete('/api/v1/notes', (req,res) => {
 //   if ( req.query.id ) {

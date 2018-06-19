@@ -21,6 +21,18 @@ storage.get = (id) => {
   });
 };
 
+storage.delete = (id) => {
+  return new Promise( (resolve, reject) => {
+    if ( database.id ) {
+      delete database[id];
+      resolve("success");
+    }
+    else {
+      reject();
+    }
+  })
+}
+
 // For saving, we just add the data into the "database", keyed by the note's id.
 storage.save = (data) => {
   return new Promise( (resolve,reject) => {
