@@ -49,7 +49,7 @@ describe('API module', () => {
       });
     done();
   });
-
+  
   it('should delete entry when given specified id', (done) => {
     let obj = {
       title: 'sushi',
