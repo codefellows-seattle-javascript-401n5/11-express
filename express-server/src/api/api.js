@@ -61,5 +61,21 @@ router.post('/api/v1/notes', (req,res) => {
 
 });
 
+// router.delete('/api/v1/notes', (req,res) => {
+
+// })
+
+// router.delete('/api/v1/notes', (req,res) => {
+//   if ( req.query.id ) {
+//     Notes.deleteOne(req.query.id)
+//       .then( success => {
+//         let data = {id:req.query.id,deleted:success};
+//         sendJSON(res,data);
+//       })
+//       .catch(console.error);
+//   }
+// });
+
+
 // ES6, FTW! Export this the cool way
 export default router;

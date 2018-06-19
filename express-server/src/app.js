@@ -15,25 +15,29 @@ app.use( router );
 // Flag to know if we are up and going
 let isRunning = false;
 
-module.exports = {
-  start: (port) => {
-    if(! isRunning) {
-      app.listen(port, (err) => {
-        if(err) { throw err; }
-        // Tick the running flag
-        isRunning = true;
-        console.log('Server is up on port', port);
-      });
-    }
-    else {
-      console.log('Server is already running');
-    }
-  },
-
-  stop: () => {
-    app.close( () => {
-      isRunning = false;
-      console.log('Server has been stopped');
+let server;
+ 
+ const start = (port) => {
+  if(! isRunning) {
+    server = app.listen(port, (err) => {
+      if(err) { throw err; }
+      // Tick the running flag
+      isRunning = true;
+      console.log('Server is up on port', port);
     });
-  },
-};
+  }
+  else {
+    console.log('Server is already running');
+  }
+  }
+  const stop = () => {
+  server.close( () => {
+    isRunning = false;
+    console.log('Server has been stopped');
+  });
+}
+
+
+export default { start, stop};
+
+
