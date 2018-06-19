@@ -3,14 +3,11 @@
   "version": "1.0.0",
   "description": "![cf](https://i.imgur.com/7v5ASc8.png) 11: Express and Babel\r ======",
   "main": "index.js",
-
   "scripts": {
     "test": "jest --verbose --coverage",
     "start": "node index.js",
     "lint": "eslint **/*.js"
-
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Aaronmeade92/11-express.git"
@@ -26,9 +23,9 @@
     "babel-env": "^2.4.1",
     "babel-eslint": "^8.2.3",
     "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
     "express": "^4.16.3",
     "jest": "^23.1.0",
-    "superagent": "^3.8.3",
-    "eslint": "^4.19.1"
+    "superagent": "^3.8.3"
   }
 }
