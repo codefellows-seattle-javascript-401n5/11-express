@@ -1,18 +1,18 @@
 'use strict';
 
 import superagent from 'superagent';
-import app from '../app.js'
+import app from '../app.js';
 
 describe('API module', () => {
 
-  beforeAll( () => {
+  beforeAll(() => {
     app.start(3000);
   });
-  
-  afterAll( () => {
+
+  afterAll(() => {
     app.stop();
   });
-  
+
 
   it('should return with an error status of 400 when a badID is returned', (done) => {
 
@@ -28,7 +28,7 @@ describe('API module', () => {
 
     let obj = {
       title: 'corndog',
-      content: 'this is a corndog'
+      content: 'this is a corndog',
     };
 
     superagent.post('http://localhost:3000/api/v1/food')
@@ -38,7 +38,7 @@ describe('API module', () => {
         expect(JSON.parse(response.text).id).toEqual(obj.title);
       })
       .catch(console.err);
-      done();
+    done();
   });
 
   it('handles a bad post request', (done) => {
@@ -47,17 +47,17 @@ describe('API module', () => {
       .then(response => {
         expect(response.statusCode).toBe(400);
       });
-      done();
+    done();
   });
 
   it('should delete entry when given specified id', (done) => {
     let obj = {
       title: 'sushi',
-      content: 'this is a sushi'
-    }
+      content: 'this is a sushi',
+    };
     superagent.post('http://localhost:3000/api/v1/food/')
       .send(obj)
-      .then(response => {
+      .then(() => {
         superagent.delete('http://localhost:3000/api/v1/food/:id')
           .then(response => {
             console.log(response.body);
